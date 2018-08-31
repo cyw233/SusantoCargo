@@ -24,6 +24,7 @@ import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
 import NotFound from './components/not-found/NotFound';
 import UpdateInfo from "./components/update-info/UpdateInfo";
+import Shippings from "./components/shippings/Shippings";
 
 import "./App.css";
 
@@ -69,6 +70,9 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/update-info" component={UpdateInfo} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/add-shipping" component={Shippings} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/create-profile" component={CreateProfile} />

@@ -7,10 +7,12 @@ import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
 import Experience from './Experience';
 import Education from './Education';
+import { getCurrentShippings } from '../../actions/shippingActions';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
+    this.props.getCurrentShippings();
   }
 
   onDeleteClick(e) {
@@ -19,7 +21,25 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
+    const { shippings } = this.props.shipping;
     const { profile, loading } = this.props.profile;
+
+
+
+    const myShippings = shippings.filter(shipping => shipping.user === user.id);
+    // let myShippings = [];
+    // shippings.map(shipping => (
+    //   shipping.user === user.id ? myShippings.push(shipping) : console.log("1")
+    // ))
+
+    let displayShippings;
+    if (myShippings.length === 0) {
+      displayShippings = <p>No shippings</p>
+    } else {
+      displayShippings = myShippings.map(myShipping => (
+        <p>number is: {myShipping.number}  </p>
+      ))
+    }
 
     let dashboardContent;
     if (profile === null || loading) {
@@ -46,6 +66,11 @@ class Dashboard extends Component {
             <Link to="/update-info" className="btn btn-light">
               <i className="fas fa-user-circle text-info mr-1" /> Update My Personal Info
             </Link>
+            <p></p>
+            <Link to="/add-shipping" className="btn btn-lg btn-info">
+              Add a Shipping
+            </Link>
+            {displayShippings}
           </div>
         );
       }
@@ -66,16 +91,17 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  deleteAccount: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
-};
+// Dashboard.propTypes = {
+//   getCurrentProfile: PropTypes.func.isRequired,
+//   deleteAccount: PropTypes.func.isRequired,
+//   auth: PropTypes.object.isRequired,
+//   profile: PropTypes.object.isRequired
+// };
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
+  shipping: state.shipping
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount})(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, getCurrentShippings})(Dashboard);
