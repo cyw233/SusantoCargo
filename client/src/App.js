@@ -23,8 +23,10 @@ import Profile from "./components/profile/Profile";
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
 import NotFound from './components/not-found/NotFound';
+import UpdateInfo from "./components/update-info/UpdateInfo";
 
 import "./App.css";
+
 
 
 // To avoid that when we refresh the page, the user's auth will loss, we add the code below:
@@ -64,6 +66,9 @@ class App extends Component {
               <Route exact path="/profile/:handle" component={Profile} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/update-info" component={UpdateInfo} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/create-profile" component={CreateProfile} />

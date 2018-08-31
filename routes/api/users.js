@@ -13,11 +13,6 @@ const validateLoginInput = require('../../validation/login');
 // Load User mongo model
 const User = require("../../models/User");
 
-// @route  GET api/users/test
-// @desc   Tests users route
-// @access Public
-router.get("/test", (req, res) => res.json({ msg: "User Works" }));
-
 // @route  POST api/users/register
 // @desc   Register user
 // @access Public
@@ -45,6 +40,8 @@ router.post("/register", (req, res) => {
         email: req.body.email,
         name: req.body.name,
         password: req.body.password,
+        home: req.body.home,
+        contact: req.body.contact,
         avatar,
         date: req.body.date
       });
@@ -83,7 +80,7 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User Matched
-        const payload = { id: user._id, name: user.name, avatar: user.avatar };
+        const payload = { id: user._id, name: user.name, home: user.home, contact: user.contact, email: user.email, avatar: user.avatar };
         // Sign Token to the logged-in user
         jwt.sign(
           payload,

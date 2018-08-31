@@ -9,6 +9,8 @@ module.exports = function validateRegisterInput(data) {
   // it too an empty string
   data.name = !isEmpty(data.name) ? data.name : '';
   data.email = !isEmpty(data.email) ? data.email : '';
+  data.home = !isEmpty(data.home) ? data.home : '';
+  data.contact = !isEmpty(data.contact) ? data.contact : '';
   data.password = !isEmpty(data.password) ? data.password : '';
   data.password2 = !isEmpty(data.password2) ? data.password2 : '';
 
@@ -18,6 +20,14 @@ module.exports = function validateRegisterInput(data) {
 
   if (Validator.isEmpty(data.name)) {
     errors.name = "Name field is required!";
+  }
+
+  if (Validator.isEmpty(data.home)) {
+    errors.home = "Home field is required!";
+  }
+
+  if (!Validator.isLength(data.contact, { min: 5, max: 15 })) {
+    errors.contact = "Contact number invalid!";
   }
 
   if (Validator.isEmpty(data.email)) {
