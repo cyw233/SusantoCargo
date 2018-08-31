@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
-import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-import InputGroup from "../common/InputGroup";
-import SelectListGroup from "../common/SelectListGroup";
-import { createProfile, getCurrentProfile } from "../../actions/profileActions";
-import isEmpty from "../../validation/is-empty";
+// import { createProfile, getCurrentProfile } from "../../actions/profileActions";
+import { updateInfo } from "../../actions/authActions";
+
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -17,7 +15,6 @@ class CreateProfile extends Component {
       home: "",
       contact: "",
       email: "",
-      password: "",
       errors: {}
     };
 
@@ -27,14 +24,7 @@ class CreateProfile extends Component {
 
   componentDidMount() {
     // this.props.getCurrentProfile();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-    
-    const user = nextProps.auth.user;
+    const user = this.props.auth.user;
       
     // Set component state
     this.setState({
@@ -43,21 +33,26 @@ class CreateProfile extends Component {
       contact: user.contact,
       email: user.email
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
     
   }
 
   onSubmit(e) {
     e.preventDefault();
 
-    const profileData = {
+    const userData = {
+      id: this.props.auth.user.id,
       name: this.state.name,
       home: this.state.home,
       contact: this.state.contact,
-      email: this.state.email,
-      password: this.state.password,
+      email: this.state.email
     };
-    console.log(profileData);
-    // this.props.createProfile(profileData, this.props.history);
+    this.props.updateInfo(userData, this.props.history);
   }
 
   onChange(e) {
@@ -114,15 +109,6 @@ class CreateProfile extends Component {
                   info="City or city & state suggested (eg. Boston, MA)"
                 />
 
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                  info="Please use comma separated values (eg.HTML,CSS,JavaScript,PHP)"
-                />
-
                 <input
                   type="submit"
                   value="Submit"
@@ -149,7 +135,4 @@ const mapStateToProps = state => ({
 });
 
 // Because we use "this.props.history", we need to use "withRouter()"
-export default connect(
-  mapStateToProps,
-  { createProfile, getCurrentProfile }
-)(withRouter(CreateProfile));
+export default connect(mapStateToProps, { updateInfo })(withRouter(CreateProfile));

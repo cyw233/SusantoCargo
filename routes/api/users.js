@@ -108,12 +108,50 @@ router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),
   (req, res) => { // get the user back from passport.js file
+    const avatar = gravatar.url(req.body.email, {
+      s: "200",
+      r: "pg",
+      d: "mm"
+    });
     res.json({
       id: req.user._id,
       name: req.user.name,
-      email: req.user.email
+      email: req.user.email,
+      home: req.user.home,
+      contact: req.user.contact,
+      avatar: avatar
     }); 
   }
 );
+
+
+// @route  POST api/users/updateinfo
+// @desc   Update user information
+// @access Public
+router.post("/updateinfo", (req, res) => {
+  // const {errors, isValid} = validateRegisterInput(req.body);
+
+  // // Check Validation
+  // if (!isValid) {
+  //   return res.status(400).json(errors);
+  // }
+
+  const newInfo = {};
+  newInfo.name = req.body.name;
+  newInfo.home = req.body.home;
+  newInfo.contact = req.body.contact;
+  newInfo.email = req.body.email;
+  newInfo.avatar = gravatar.url(req.body.email, {
+    s: "200",
+    r: "pg",
+    d: "mm"
+  });
+
+  User.findOneAndUpdate(
+    { _id: req.body.id },
+    { $set: newInfo },
+    { new: true}).then(user => res.json(user));
+
+});
 
 module.exports = router;

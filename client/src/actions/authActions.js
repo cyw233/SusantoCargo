@@ -47,6 +47,20 @@ export const setCurrentUser = (decoded) => {
   }
 }
 
+
+// Update Info
+export const updateInfo = (userData, history) => dispatch => {
+  axios.post('/api/users/updateinfo', userData)
+    .then(res => dispatch(logoutUser()))
+    .catch(err => 
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
+};
+
+
 // Logout
 export const logoutUser = () => dispatch => {
   // Remove token from localStorage
