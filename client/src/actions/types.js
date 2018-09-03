@@ -18,3 +18,4 @@ export const DELETE_POST = "DELETE_POST";
 export const ADD_SHIPPING = "ADD_SHIPPING";
 export const SHIPPING_LOADING = "SHIPPING_LOADING";
 export const GET_SHIPPING = "GET_SHIPPING";
+export const GET_SHIPPINGS = "GET_SHIPPINGS";

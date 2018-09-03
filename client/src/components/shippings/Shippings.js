@@ -5,7 +5,6 @@ import PostForm from '../posts/PostForm'; // Form we can type in and submit
 import Spinner from '../common/Spinner';
 import RequestForm from './RequestForm';
 
-
 class Shippings extends Component {
   componentDidMount() {
   }

@@ -14,8 +14,6 @@ class RequestForm extends Component {
       number: "",
       destination: "",
       origin: "",
-      departure: "",
-      arrival: "",
       message: "",
       errors: {},
       shipmentinformation: "",
@@ -39,8 +37,6 @@ class RequestForm extends Component {
       number: this.state.number,
       destination: this.state.destination,
       origin: this.state.origin,
-      departure: this.state.departure,
-      arrival: this.state.arrival,
       message: this.state.message,
       shipmentinformation: this.state.shipmentinformation
     };
@@ -67,7 +63,7 @@ class RequestForm extends Component {
     ];
 
     return (
-      <div className="add-experience">
+      <div className="request-form">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -78,10 +74,11 @@ class RequestForm extends Component {
               <p className="lead text-center">
                 Add your shipping details below
               </p>
-              <small className="d-blcik pb-3">
-                All information is required
+              <small className="d-block pb-3 mb-10">
+                All information is required except for Message
               </small>
               <form onSubmit={this.onSubmit}>
+                <h6>Number of Boxes</h6>
                 <TextFieldGroup
                   type="number"
                   placeholder="Number"
@@ -90,6 +87,7 @@ class RequestForm extends Component {
                   onChange={this.onChange}
                   error={errors.number}
                 />
+                <h6>Destination Address in Jakarta</h6>
                 <TextFieldGroup
                   placeholder="Destination"
                   name="destination"
@@ -97,8 +95,9 @@ class RequestForm extends Component {
                   onChange={this.onChange}
                   error={errors.destination}
                 />
+                <h6>Pickup Address in Melbourne</h6>
                 <TextFieldGroup
-                  placeholder="Origin"
+                  placeholder="Pickup Address"
                   name="origin"
                   value={this.state.origin}
                   onChange={this.onChange}
@@ -112,7 +111,7 @@ class RequestForm extends Component {
                   options={options}
                   error={errors.shipmentinformation}
                 />
-                <h6>Departure Date from Melbourne</h6>
+                {/* <h6>Departure Date from Melbourne</h6>
                 <TextFieldGroup
                   name="departure"
                   type="date"
@@ -127,14 +126,15 @@ class RequestForm extends Component {
                   value={this.state.arrival}
                   onChange={this.onChange}
                   error={errors.arrival}
-                />
+                /> */}
+                <h6>Message (Optional)</h6>
                 <TextAreaFieldGroup
                   placeholder="Message (Optional)"
                   name="message"
                   value={this.state.message}
                   onChange={this.onChange}
                   error={errors.message}
-                  info="Leave message here if you have one"
+                  info="Leave a message here if you want"
                 />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>

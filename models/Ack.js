@@ -16,17 +16,20 @@ const AckSchema = new Schema({
     required: true
   },
   pickuptime: {
-    type: String
+    type: String,
+    default: ""
   },
   cost: {
     type: Number,
     required: true
   },
   hbl: {
-    type: String
+    type: String,
+    default: ""
   },
   message: {
-    type: String
+    type: String,
+    default: ""
   }
 });
 

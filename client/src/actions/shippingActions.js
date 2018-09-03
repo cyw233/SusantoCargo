@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_SHIPPING, GET_SHIPPING, SHIPPING_LOADING, GET_ERRORS, CLEAR_ERRORS } from './types';
+import { ADD_SHIPPING, GET_SHIPPING, GET_SHIPPINGS, SHIPPING_LOADING, GET_ERRORS, CLEAR_ERRORS } from './types';
 
 
 // Add Shipping
@@ -21,10 +21,29 @@ export const addShipping = (reqData, history) => dispatch => {
 };
 
 
-// // GET current shippings
+// GET all shippings
 export const getCurrentShippings = () => dispatch => {
   dispatch(setShippingLoading());
   axios.get('/api/shippings')
+    .then(res => 
+      dispatch({
+        type: GET_SHIPPINGS,
+        payload: res.data
+      })
+    )
+    .catch(err => 
+      dispatch({
+        type: GET_SHIPPINGS,
+        payload: {}
+      })
+    )
+};
+
+
+// GET one specific shipping
+export const getOneShipping = shippingId => dispatch => {
+  dispatch(setShippingLoading());
+  axios.get(`/api/shippings/${shippingId}`)
     .then(res => 
       dispatch({
         type: GET_SHIPPING,

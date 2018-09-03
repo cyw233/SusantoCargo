@@ -55,8 +55,7 @@ router.post(
       number: req.body.number,
       destination: req.body.destination,
       origin: req.body.origin,
-      departure: req.body.departure,
-      arrival: req.body.arrival,
+      shipmentinformation: req.body.shipmentinformation,
       message: req.body.message,
       user: req.user.id
     });

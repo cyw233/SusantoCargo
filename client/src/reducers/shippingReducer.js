@@ -1,6 +1,8 @@
-import { ADD_SHIPPING, GET_SHIPPING, SHIPPING_LOADING } from '../actions/types';
+import { ADD_SHIPPING, GET_SHIPPING, GET_SHIPPINGS, SHIPPING_LOADING } from '../actions/types';
 
 const initialState = {
+  shipping: {},
+  ack: {},
   shippings: [],
   loading: false
 };
@@ -13,6 +15,12 @@ export default function (state = initialState, action) {
         loading: true
       };
     case GET_SHIPPING:
+      return {
+        ...state,
+        shipping: action.payload,
+        loading: false
+      };
+    case GET_SHIPPINGS:
       return {
         ...state,
         shippings: action.payload,

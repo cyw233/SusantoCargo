@@ -1,0 +1,153 @@
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import Spinner from "../common/Spinner";
+import PropTypes from "prop-types";
+import { getOneShipping } from "../../actions/shippingActions";
+
+class ShippingStatus extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      number: "",
+      destination: "",
+      origin: "",
+      message: "",
+      errors: {},
+      shipmentinformation: "",
+      disabled: false
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
+  componentDidMount() {
+    this.props.getOneShipping(this.props.match.params.shippingId);
+  }
+
+  render() {
+    const { shipping, loading } = this.props.shipping;
+    const { ack } = this.props.shipping.shipping;
+
+    let shippingStatus;
+    if (ack == undefined) {
+      shippingStatus = <Spinner />
+    } else {
+      shippingStatus = (
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <table className="table table-bordered">
+                <tbody>
+                  <tr>
+                    <th scope="row">Status</th>
+                    <td>{ack.status}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Pickup Time</th>
+                    <td>{ack.pickuptime}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cost</th>
+                    <td>{shipping.number * 35}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">HBL Number</th>
+                    <td>{ack.hbl}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">message</th>
+                    <td>{ack.message}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    
+
+    let shippingInfo;
+    // let shippingStatus;
+    if (shipping == null || loading) {
+      shippingInfo = <Spinner />;
+    } else {
+      shippingInfo = (
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <table className="table table-bordered">
+                <tbody>
+                  <tr>
+                    <th scope="row">Number</th>
+                    <td>{shipping.number}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">From</th>
+                    <td>{shipping.origin}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">To</th>
+                    <td>{shipping.destination}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Period</th>
+                    <td>{shipping.shipmentinformation}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">message</th>
+                    <td>{shipping.message}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      );
+      
+    }
+
+    return (
+      <div className="shipping-status">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 m-auto">
+              <Link to="/dashboard" className="btn btn-info mb-4">
+                Go Back
+              </Link>
+              <h3>Shippping Information:</h3>
+              {shippingInfo}
+              <hr/>
+              <h3>Ack:</h3>
+              {shippingStatus}
+              <Link to={`/edit-ack/${this.props.shipping.shipping._id}`} className="btn btn-info mb-4">
+                Edit Ack
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+// AddExperience.propTypes = {
+//   addExperience: PropTypes.func.isRequired,
+//   profile: PropTypes.object.isRequired,
+//   errors: PropTypes.object.isRequired
+// };
+
+const mapStateToProps = state => ({
+  shipping: state.shipping,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { getOneShipping }
+)(withRouter(ShippingStatus));

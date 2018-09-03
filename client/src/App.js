@@ -25,6 +25,9 @@ import Post from './components/post/Post';
 import NotFound from './components/not-found/NotFound';
 import UpdateInfo from "./components/update-info/UpdateInfo";
 import Shippings from "./components/shippings/Shippings";
+import ShippingStatus from "./components/shippings/ShippingStatus";
+import AckForm from "./components/shippings/AckForm";
+
 
 import "./App.css";
 
@@ -73,6 +76,15 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/add-shipping" component={Shippings} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/view-status/:shippingId" component={ShippingStatus} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/update-info" component={UpdateInfo} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/edit-ack/:shippingId" component={AckForm} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/create-profile" component={CreateProfile} />
