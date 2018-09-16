@@ -67,7 +67,7 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
+              <Link to="/dashboard" className="btn btn-info mb-2">
                 Go Back
               </Link>
               <h1 className="display-4 text-center">Update My Information</h1>
@@ -79,7 +79,7 @@ class CreateProfile extends Component {
                   value={this.state.name}
                   onChange={this.onChange}
                   error={errors.name}
-                  info="A unique handle for your profile URL. Your full name, company name, nickname"
+                  info="Please enter your name"
                 />
 
                 <TextFieldGroup
@@ -88,7 +88,7 @@ class CreateProfile extends Component {
                   value={this.state.home}
                   onChange={this.onChange}
                   error={errors.home}
-                  info="Your home"
+                  info="Please enter your home address"
                 />
 
                 <TextFieldGroup
@@ -97,7 +97,7 @@ class CreateProfile extends Component {
                   value={this.state.contact}
                   onChange={this.onChange}
                   error={errors.contact}
-                  info="Could be your own contact or a company one"
+                  info="Please enter your contact number"
                 />
 
                 <TextFieldGroup
@@ -106,14 +106,15 @@ class CreateProfile extends Component {
                   value={this.state.email}
                   onChange={this.onChange}
                   error={errors.email}
-                  info="City or city & state suggested (eg. Boston, MA)"
+                  info="Please enter your email address"
                 />
 
                 <input
                   type="submit"
-                  value="Submit"
+                  value="Update"
                   className="btn btn-info btn-block mt-4"
                 />
+                <small className="d-block pb-3">* Once update, you will be logged out!</small>
               </form>
             </div>
           </div>

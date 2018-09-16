@@ -20,6 +20,23 @@ export const addShipping = (reqData, history) => dispatch => {
     )
 };
 
+// Edit Ack
+export const editAck = (reqData, history) => dispatch => {
+  dispatch(clearErrors());
+  axios.post(`/api/shippings/edit-ack/${reqData.shipping}`, reqData)
+    .then(res => history.push(`/view-status/${reqData.shipping}`)
+      // dispatch({
+      //   type: ADD_SHIPPING,
+      //   payload: res.data
+      // })
+    )
+    .catch(err => 
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
+};
 
 // GET all shippings
 export const getCurrentShippings = () => dispatch => {

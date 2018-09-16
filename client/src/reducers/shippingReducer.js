@@ -2,7 +2,6 @@ import { ADD_SHIPPING, GET_SHIPPING, GET_SHIPPINGS, SHIPPING_LOADING } from '../
 
 const initialState = {
   shipping: {},
-  ack: {},
   shippings: [],
   loading: false
 };

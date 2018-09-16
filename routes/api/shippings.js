@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const nodemailer = require("nodemailer");
 
 
 // Get Shipping mongo model
@@ -64,5 +65,77 @@ router.post(
   }
 );
 
+
+
+// @route  POST api/shippings
+// @desc   Create shipping
+// @access Private
+router.post(
+  "/edit-ack/:shippingId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // Check validation
+    // const { errors, isValid } = validateShippingInput(req.body);
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
+
+    const newShipping = {};
+    newShipping.number = req.body.number;
+    newShipping.destination = req.body.destination;
+    newShipping.origin = req.body.origin;
+    newShipping.shipmentinformation = req.body.shipmentinformation;
+    newShipping.message = req.body.shippingmessage;
+    newShipping.user = req.body.user;
+    newShipping.date = req.body.date;
+    
+    newShipping.ack = {};
+    newShipping.ack.status = req.body.status;
+    newShipping.ack.pickuptime = req.body.pickuptime;
+    newShipping.ack.cost = req.body.cost;
+    newShipping.ack.hbl = req.body.hbl;
+    newShipping.ack.message = req.body.ackmessage;
+
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+          user: 'chenyangw233@gmail.com',
+          pass: 'WANGcy888' 
+      }
+    });
+
+    Shipping.findOneAndUpdate(
+      { _id: req.body.shipping },
+      { $set: newShipping },
+      { new: true }
+    )
+    .then(shipping => {
+      User.findOne({ _id: req.body.user }).then(user => {
+        // setup email data with unicode symbols
+        let mailOptions = {
+          from: 'chenyangw233@gmail.com', // sender address
+          to: user.email, // list of receivers
+          subject: 'Hello World', // Subject line
+          text: 'Hello world? Amazing', // plain text body
+          html: `
+            <h1>Your Order has updated!<h1>
+            <h3>Here is your latest details:</h3>
+            <p>${req.body.hbl}</p>
+          ` // html body
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          return res.json(shipping)
+        })
+      })
+    })
+    // .then(shipping => res.json(shipping));
+
+  }
+);
 
 module.exports = router;

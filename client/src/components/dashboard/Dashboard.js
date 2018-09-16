@@ -11,7 +11,7 @@ import { getCurrentShippings } from "../../actions/shippingActions";
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.getCurrentProfile();
+    // this.props.getCurrentProfile();
     this.props.getCurrentShippings();
   }
 
@@ -21,8 +21,8 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
-    const { shippings } = this.props.shipping;
-    const { profile, loading } = this.props.profile;
+    const { shippings, loading } = this.props.shipping;
+    // const { profile, loading } = this.props.profile;
 
     let displayShippings;
     if (shippings === null || loading) {
@@ -33,91 +33,94 @@ class Dashboard extends Component {
       );
       if (myShippings.length === 0) {
         displayShippings = (
-          <p>No shippings</p>
+          <tr><td>No shippings</td></tr>
         );
       } else {
         // displayShippings = myShippings.map(myShipping => (
         //   <p key={myShipping._id}>number is: {myShipping.number}  </p>
         // ))
         displayShippings = myShippings.map(myShipping => (
-          <table key={myShipping._id} className="table">
-            <thead>
-              <tr>
-                <th>Number</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Period</th>
-                <th>Message</th>
-              </tr>
-              <tr>
-                <td>{myShipping.number}</td>
-                <td>{myShipping.origin}</td>
-                <td>{myShipping.destination}</td>
-                <td>{myShipping.shipmentinformation}</td>
-                <td>{myShipping.message.slice(0, 10) + "..."}</td>
-                <td>
-                  <Link
-                    to={`/view-status/${myShipping._id}`}
-                    className="btn btn-info btn-sm"
-                  >
-                    View Status
-                  </Link>
-                </td>
-              </tr>
-            </thead>
-          </table>
+          <tr key={myShipping._id} >
+            <td>{myShipping.number}</td>
+            <td>{myShipping.origin}</td>
+            <td>{myShipping.destination}</td>
+            <td>{myShipping.shipmentinformation}</td>
+            <td>{myShipping.message.length > 10 ? myShipping.message.slice(0, 10) + "..." : myShipping.message}</td>
+            <td>
+              <Link
+                to={`/view-status/${myShipping._id}`}
+                className="btn btn-info btn-sm"
+              >
+                View Status
+              </Link>
+            </td>
+          </tr>
         ));
       }
     }
 
     let dashboardContent;
-    if (profile === null || loading) {
-      dashboardContent = <Spinner />;
-    } else {
-      // If the profile is not null, check if the user's profile is empty
-      if (Object.keys(profile).length > 0) {
-        // DISPLAY PROFILE
-        dashboardContent = (
-          <div>
-            <p className="lead text-muted">
-              Welcome{" "}
-              <Link to={`/profile/${profile.handle}`}> {user.name}</Link>
-            </p>
-            <ProfileActions />
-            <Experience experience={profile.experience} />
-            <Education education={profile.education} />
-            <div style={{ marginBottom: "60px" }} />
-            <button
-              onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger"
-            >
-              Delete My Account
-            </button>
-          </div>
-        );
-      } else {
-        // User is login but has no profile
+    // if (profile === null || loading) {
+    //   dashboardContent = <Spinner />;
+    // } else {
+    //   // If the profile is not null, check if the user's profile is empty
+    //   if (Object.keys(profile).length > 0) {
+    //     // DISPLAY PROFILE
+    //     dashboardContent = (
+    //       <div>
+    //         <p className="lead text-muted">
+    //           Welcome{" "}
+    //           <Link to={`/profile/${profile.handle}`}> {user.name}</Link>
+    //         </p>
+    //         <ProfileActions />
+    //         <Experience experience={profile.experience} />
+    //         <Education education={profile.education} />
+    //         <div style={{ marginBottom: "60px" }} />
+    //         <button
+    //           onClick={this.onDeleteClick.bind(this)}
+    //           className="btn btn-danger"
+    //         >
+    //           Delete My Account
+    //         </button>
+    //       </div>
+    //     );
+    //   } else {
+    //     // User is login but has no profile
         dashboardContent = (
           <div>
             <p className="lead text-muted">Welcome {user.name}</p>
-            <Link to="/update-info" className="btn btn-light">
-              <i className="fas fa-user-circle text-info mr-1" /> Update My
-              Personal Info
+            <Link to="/update-info" className="btn btn-dark">
+              <i className="fas fa-user-circle text-info mr-1" /> Personal Infomation
             </Link>
-            <hr />
+            {"  "}
+            <Link to="/reset-password" className="btn btn-danger">
+              <i className="fas fa-key"></i> Reset Password
+            </Link>
+            <hr style={{height: '1px', border: '0', backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))'}} />
             <div className="mb-4">
               <Link to="/add-shipping" className="btn btn-lg btn-info">
-                Add a Shipping
+                Book a Shipping
               </Link>
             </div>
             <div className="bg-light rounded border border-secondary p-2">
               <h4 className="mt-10 mb-4">My Shipping Bookings</h4>
-              {displayShippings}
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Number</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Period</th>
+                  <th>Message</th>
+                </tr>
+                {displayShippings}
+              </thead>
+            </table>
             </div>
           </div>
         );
-      }
-    }
+      // }
+    // }
 
     return (
       <div className="dashboard">

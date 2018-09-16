@@ -34,7 +34,7 @@ class ShippingStatus extends Component {
     const { ack } = this.props.shipping.shipping;
 
     let shippingStatus;
-    if (ack == undefined) {
+    if (ack == undefined || loading) {
       shippingStatus = <Spinner />
     } else {
       shippingStatus = (
@@ -53,14 +53,19 @@ class ShippingStatus extends Component {
                   </tr>
                   <tr>
                     <th scope="row">Cost</th>
-                    <td>{shipping.number * 35}</td>
+                    <td>
+                      {"$" + shipping.number * 35 + " "}
+                      <small className="d-inline">
+                        (*$35 for each box)
+                      </small>
+                    </td>
                   </tr>
                   <tr>
                     <th scope="row">HBL Number</th>
                     <td>{ack.hbl}</td>
                   </tr>
                   <tr>
-                    <th scope="row">message</th>
+                    <th scope="row">Message</th>
                     <td>{ack.message}</td>
                   </tr>
                 </tbody>
@@ -100,7 +105,7 @@ class ShippingStatus extends Component {
                     <td>{shipping.shipmentinformation}</td>
                   </tr>
                   <tr>
-                    <th scope="row">message</th>
+                    <th scope="row">Message</th>
                     <td>{shipping.message}</td>
                   </tr>
                 </tbody>
@@ -113,17 +118,17 @@ class ShippingStatus extends Component {
     }
 
     return (
-      <div className="shipping-status">
+      <div className="shipping-status pb-5">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-info mb-4">
                 Go Back
               </Link>
-              <h3>Shippping Information:</h3>
+              <h3 className="text-center">Shipping Information:</h3>
               {shippingInfo}
-              <hr/>
-              <h3>Ack:</h3>
+              <hr style={{height: '1px', border: '0', backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))'}} />
+              <h3 className="text-center">Shipping Status:</h3>
               {shippingStatus}
               <Link to={`/edit-ack/${this.props.shipping.shipping._id}`} className="btn btn-info mb-4">
                 Edit Ack

@@ -63,7 +63,7 @@ class RequestForm extends Component {
     ];
 
     return (
-      <div className="request-form">
+      <div className="request-form" style={{paddingBottom: '100px'}}>
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -74,9 +74,9 @@ class RequestForm extends Component {
               <p className="lead text-center">
                 Add your shipping details below
               </p>
-              <small className="d-block pb-3 mb-10">
-                All information is required except for Message
-              </small>
+              {/* <small className="d-block pb-3 mb-10">
+                * All information is required except for Message
+              </small> */}
               <form onSubmit={this.onSubmit}>
                 <h6>Number of Boxes</h6>
                 <TextFieldGroup
@@ -134,7 +134,7 @@ class RequestForm extends Component {
                   value={this.state.message}
                   onChange={this.onChange}
                   error={errors.message}
-                  info="Leave a message here if you want"
+                  info="Leave a message to the shipper here if you want"
                 />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>

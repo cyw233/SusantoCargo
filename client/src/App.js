@@ -27,6 +27,7 @@ import UpdateInfo from "./components/update-info/UpdateInfo";
 import Shippings from "./components/shippings/Shippings";
 import ShippingStatus from "./components/shippings/ShippingStatus";
 import AckForm from "./components/shippings/AckForm";
+import ResetPassword from './components/update-info/ResetPassword';
 
 
 import "./App.css";
@@ -81,10 +82,10 @@ class App extends Component {
                 <PrivateRoute exact path="/view-status/:shippingId" component={ShippingStatus} />
               </Switch>
               <Switch>
-                <PrivateRoute exact path="/update-info" component={UpdateInfo} />
+                <PrivateRoute exact path="/edit-ack/:shippingId" component={AckForm} />
               </Switch>
               <Switch>
-                <PrivateRoute exact path="/edit-ack/:shippingId" component={AckForm} />
+                <PrivateRoute exact path="/reset-password" component={ResetPassword} />
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/create-profile" component={CreateProfile} />

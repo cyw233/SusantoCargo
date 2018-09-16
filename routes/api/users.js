@@ -150,8 +150,49 @@ router.post("/updateinfo", (req, res) => {
   User.findOneAndUpdate(
     { _id: req.body.id },
     { $set: newInfo },
-    { new: true}).then(user => res.json(user));
+    { new: true }
+  ).then(user => res.json(user));
 
 });
+
+
+// @route  POST api/users/resetpassword
+// @desc   Reset password
+// @access Private
+router.post("/resetpassword", (req, res) => {
+  // const {errors, isValid} = validateRegisterInput(req.body);
+
+  // Check Validation
+  // if (!isValid) {
+  //   return res.status(400).json(errors);
+  // }
+
+  const resetUser = {};
+  resetUser.email = req.body.email;
+  resetUser.name = req.body.name;
+  resetUser.home = req.body.home;
+  resetUser.contact = req.body.contact;
+  resetUser.avatar = gravatar.url(req.body.email, {
+    s: "200",
+    r: "pg",
+    d: "mm"
+  });
+  resetUser.password = req.body.password;
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(resetUser.password, salt, (err, hash) => {
+      if (err) throw err;
+      resetUser.password = hash;
+      User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $set: resetUser },
+        { new: true }
+      ).then(user => res.json(user));
+    });
+  });
+
+});
+
+
+
 
 module.exports = router;

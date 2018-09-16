@@ -5,7 +5,7 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addShipping } from "../../actions/shippingActions";
+import { editAck } from "../../actions/shippingActions";
 
 class Ack extends Component {
   constructor(props) {
@@ -51,16 +51,23 @@ class Ack extends Component {
     e.preventDefault();
 
     const reqData = {
+      editor: this.props.auth.user.id,
+      user: this.props.shipping.shipping.user,
+      shipping: this.props.shipping.shipping._id,
+      number: this.props.shipping.shipping.number,
+      destination: this.props.shipping.shipping.destination,
+      origin: this.props.shipping.shipping.origin,
+      shipmentinformation: this.props.shipping.shipping.shipmentinformation,
+      shippingmessage: this.props.shipping.shipping.message,
+      date: this.props.shipping.shipping.date,
       status: this.state.status,
       pickuptime: this.state.pickuptime,
       cost: this.state.cost,
       hbl: this.state.hbl,
-      message: this.state.message
+      ackmessage: this.state.message
     };
-    console.log(reqData);
 
-    this.props.addShipping(reqData, this.props.history);
-    // this.props.addExperience(reqData, this.props.history);
+    this.props.editAck(reqData, this.props.history);
   }
 
   onChange(e) {
@@ -153,11 +160,12 @@ class Ack extends Component {
 // };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   shipping: state.shipping,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { addShipping }
+  { editAck }
 )(withRouter(Ack));

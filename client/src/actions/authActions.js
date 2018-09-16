@@ -61,6 +61,21 @@ export const updateInfo = (userData, history) => dispatch => {
 };
 
 
+// Reset Password
+export const resetPassword = (resetUser, history) => dispatch => {
+  // post to the backend, and since we add "proxy": "http://localhost:5000" in the
+  // package.json, we do not have to indicate it
+  axios.post('/api/users/resetpassword', resetUser)
+    .then(res => dispatch(logoutUser()))
+    .catch(err => 
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+
 // Logout
 export const logoutUser = () => dispatch => {
   // Remove token from localStorage
