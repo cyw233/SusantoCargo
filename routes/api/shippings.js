@@ -47,10 +47,10 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // Check validation
-    // const { errors, isValid } = validateShippingInput(req.body);
-    // if (!isValid) {
-    //   return res.status(400).json(errors);
-    // }
+    const { errors, isValid } = validateShippingInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
     const newShipping = new Shipping({
       number: req.body.number,
@@ -101,8 +101,8 @@ router.post(
     let transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-          user: 'chenyangw233@gmail.com',
-          pass: 'WANGcy888' 
+        user: 'chenyangw233@gmail.com',
+        pass: 'WANGcy888' 
       }
     });
 
@@ -115,15 +115,15 @@ router.post(
       User.findOne({ _id: req.body.user }).then(user => {
         // setup email data with unicode symbols
         let mailOptions = {
-          from: 'chenyangw233@gmail.com', // sender address
+          from: 'noreply-susanto', // sender address
           to: user.email, // list of receivers
-          subject: 'Hello World', // Subject line
+          subject: 'SusantoCargo - You Latest Shipping Information', // Subject line
           text: 'Hello world? Amazing', // plain text body
           html: `
-            <h1>Your Order has updated!<h1>
+            <h1>Your Order has Updated!<h1>
             <h3>Here is your latest details:</h3>
             <p>${req.body.hbl}</p>
-          ` // html body
+          `
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {

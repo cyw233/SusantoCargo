@@ -9,6 +9,8 @@ const passport = require("passport");
  // Load Input Validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const validateUpdateInformation = require('../../validation/update-information');
+const validateResetPassword = require('../../validation/reset-password');
 
 // Load User mongo model
 const User = require("../../models/User");
@@ -129,12 +131,12 @@ router.get(
 // @desc   Update user information
 // @access Public
 router.post("/updateinfo", (req, res) => {
-  // const {errors, isValid} = validateRegisterInput(req.body);
+  const {errors, isValid} = validateUpdateInformation(req.body);
 
-  // // Check Validation
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   const newInfo = {};
   newInfo.name = req.body.name;
@@ -160,12 +162,12 @@ router.post("/updateinfo", (req, res) => {
 // @desc   Reset password
 // @access Private
 router.post("/resetpassword", (req, res) => {
-  // const {errors, isValid} = validateRegisterInput(req.body);
+  const {errors, isValid} = validateResetPassword(req.body);
 
   // Check Validation
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   const resetUser = {};
   resetUser.email = req.body.email;

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Spinner from "../common/Spinner";
 import PropTypes from "prop-types";
 import { getOneShipping } from "../../actions/shippingActions";
+import $ from "jquery";
 
 class ShippingStatus extends Component {
   constructor(props) {
@@ -30,7 +31,9 @@ class ShippingStatus extends Component {
   }
 
   render() {
+    $(".close").click()
     const { shipping, loading } = this.props.shipping;
+    const { user } = this.props.auth;
     const { ack } = this.props.shipping.shipping;
 
     let shippingStatus;
@@ -130,9 +133,13 @@ class ShippingStatus extends Component {
               <hr style={{height: '1px', border: '0', backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))'}} />
               <h3 className="text-center">Shipping Status:</h3>
               {shippingStatus}
-              <Link to={`/edit-ack/${this.props.shipping.shipping._id}`} className="btn btn-info mb-4">
-                Edit Ack
-              </Link>
+              {
+                user.id === "5ba1cc421adfe0b2ccf506b5" ?
+                <Link to={`/edit-ack/${this.props.shipping.shipping._id}`} className="btn btn-info mb-4">
+                  Edit Ack
+                </Link>
+                : null
+              }
             </div>
           </div>
         </div>
@@ -148,6 +155,7 @@ class ShippingStatus extends Component {
 // };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   shipping: state.shipping,
   errors: state.errors
 });

@@ -47,7 +47,6 @@ class ResetPassword extends Component {
       password2: this.state.password2
     };
 
-    console.log(resetUser);
     this.props.resetPassword(resetUser, this.props.history);
   }
 

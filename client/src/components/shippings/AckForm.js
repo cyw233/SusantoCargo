@@ -6,6 +6,8 @@ import SelectListGroup from "../common/SelectListGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { editAck } from "../../actions/shippingActions";
+import Spinner from "../common/Spinner";
+import $ from "jquery";
 
 class Ack extends Component {
   constructor(props) {
@@ -143,7 +145,35 @@ class Ack extends Component {
                   error={errors.message}
                   info="Leave a message here if you want"
                 />
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                {/* <input type="submit" className="btn btn-info btn-block mt-4" /> */}
+                <input type="submit" className="btn btn-info btn-block mt-4" data-toggle="modal" data-target="#sendingModal" />
+
+                {/* <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#sendingModal">
+                  Launch demo modal
+                </button> */}
+
+                <div className="modal fade" id="sendingModal" tabIndex="-1" role="dialog" aria-labelledby="sendingModalLabel" aria-hidden="true">
+                  <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="sendingModalLabel">Sending email to the customer...Please wait</h5>
+                        <button type="button" className="close text-white" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div className="modal-body">
+                        <Spinner />
+                      </div>
+                      {/* <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                      </div> */}
+                    </div>
+                  </div>
+                </div>
+
+
+
               </form>
             </div>
           </div>

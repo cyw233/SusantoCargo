@@ -4,14 +4,26 @@ const isEmpty = require("./is-empty");
 module.exports = function validateShippingInput(data) {
   let errors = {};
 
-  data.text = !isEmpty(data.text) ? data.text : "";
+  data.number = !isEmpty(data.number) ? data.number : "";
+  data.destination = !isEmpty(data.destination) ? data.destination : "";
+  data.origin = !isEmpty(data.origin) ? data.origin : "";
+  data.shipmentinformation = !isEmpty(data.shipmentinformation) ? data.shipmentinformation : "";
 
-  if (!Validator.isLength(data.text, { min: 5, max: 300 })) {
-    errors.text = "Post must be between 5 and 300 charaters";
+
+  if (Validator.isEmpty(data.number)) {
+    errors.number = "Number of boxes is required!";
   }
 
-  if (Validator.isEmpty(data.text)) {
-    errors.text = "Text field is required!";
+  if (Validator.isEmpty(data.destination)) {
+    errors.destination = "Destination is required!";
+  }
+
+  if (Validator.isEmpty(data.origin)) {
+    errors.origin = "Pickup Address is required!";
+  }
+
+  if (Validator.isEmpty(data.shipmentinformation)) {
+    errors.shipmentinformation = "You must select a departure date!";
   }
 
   return {
