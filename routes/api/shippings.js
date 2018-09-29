@@ -66,9 +66,33 @@ router.post(
 );
 
 
+// @route  POST api/shippings/create-ack/:shippingId
+// @desc   Create ack
+// @access Private
+router.post(
+  "/create-ack/:shippingId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // Check validation
+    // const { errors, isValid } = validateShippingInput(req.body);
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
 
-// @route  POST api/shippings
-// @desc   Create shipping
+    Shipping.findOneAndUpdate(
+      { _id: req.params.shippingId },
+      { $set: { acked: true } },
+      { new: true }
+    )
+    .then(shipping => res.json(shipping));
+
+  }
+);
+
+
+
+// @route  POST api/shippings/edit-ack/:shippingId
+// @desc   Edit ack
 // @access Private
 router.post(
   "/edit-ack/:shippingId",
@@ -120,9 +144,20 @@ router.post(
           subject: 'SusantoCargo - You Latest Shipping Information', // Subject line
           text: 'Hello world? Amazing', // plain text body
           html: `
-            <h1>Your Order has Updated!<h1>
-            <h3>Here is your latest details:</h3>
-            <p>${req.body.hbl}</p>
+            <h1>Your Order Ack Has Been Updated!<h1>
+            <h3>Your Shipping Information:</h3>            
+            <p><strong>Number</strong>: ${shipping.number}</p>
+            <p><strong>From</strong>: ${shipping.origin}</p>
+            <p><strong>To</strong>: ${shipping.destination}</p>
+            <p><strong>Period</strong>: ${shipping.shipmentinformation}</p>
+            <p><strong>Message</strong>: ${shipping.message}</p>
+            <br/>
+            <h3>Your Latest Ack:</h3>
+            <p><strong>Status</strong>: ${req.body.status}</p>
+            <p><strong>Pickup Time</strong>: ${req.body.pickuptime}</p>
+            <p><strong>Cost</strong>: ${req.body.cost}</p>
+            <p><strong>HBL Number</strong>: ${req.body.hbl}</p>
+            <p><strong>Message</strong>: ${req.body.ackmessage}</p>
           `
         };
         transporter.sendMail(mailOptions, (error, info) => {

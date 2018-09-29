@@ -34,6 +34,10 @@ const ShippingSchema = new Schema({
   message: {
     type: String
   },
+  acked: {
+    type: Boolean,
+    default: false
+  },
   date: {
     type: Date,
     default: Date.now

@@ -56,10 +56,10 @@ class RequestForm extends Component {
     // Select options for status
     const options = [
       { label: "Departure from Melbourne - Arrival in Jakarta", value: 0 },
-      { label: "07/08/2018 - 17/08/2018", value: "07/08/2018 - 17/08/2018" },
-      { label: "14/09/2018 - 23/09/2018", value: "14/09/2018 - 23/09/2018" },
-      { label: "27/09/2018 - 05/10/2018", value: "27/09/2018 - 05/10/2018" },
-      { label: "10/10/2018 - 20/10/2018", value: "10/10/2018 - 20/10/2018" },
+      { label: "20/10/2018 - 30/10/2018", value: "20/10/2018 - 30/10/2018" },
+      { label: "01/11/2018 - 11/11/2018", value: "01/11/2018 - 11/11/2018" },
+      { label: "15/11/2018 - 25/11/2018", value: "15/11/2018 - 25/11/2018" },
+      { label: "01/12/2018 - 11/12/2018", value: "01/12/2018 - 11/12/2018" },
     ];
 
     return (
@@ -70,7 +70,7 @@ class RequestForm extends Component {
               <Link to="/dashboard" className="btn btn-info">
                 Go Back
               </Link>
-              <h1 className="display-4 text-center">Add a Shipping</h1>
+              <h1 className="display-4 text-center">Book a Shipping</h1>
               <p className="lead text-center">
                 Add your shipping details below
               </p>

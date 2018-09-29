@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { editAck } from "../../actions/shippingActions";
 import Spinner from "../common/Spinner";
-import $ from "jquery";
 
 class Ack extends Component {
   constructor(props) {
@@ -77,7 +76,7 @@ class Ack extends Component {
   }
 
   render() {
-    const { shipping, loading } = this.props.shipping;
+    const { shipping } = this.props.shipping;
     const { errors } = this.state;
 
     // Select options for status

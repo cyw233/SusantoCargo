@@ -75,6 +75,14 @@ export const getOneShipping = shippingId => dispatch => {
     )
 };
 
+
+// Create Ack
+export const createAck = (shippingId, history) => dispatch => {
+  axios.post(`/api/shippings/create-ack/${shippingId}`)
+    .then(res => window.location.reload(false))
+    .catch(err => console.log("Hi"))
+};
+
 // Loading when fetching shippings
 export const setShippingLoading = () => {
   return {

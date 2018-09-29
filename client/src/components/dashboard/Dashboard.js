@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import { getCurrentShippings } from "../../actions/shippingActions";
 
@@ -11,9 +10,6 @@ class Dashboard extends Component {
     this.props.getCurrentShippings();
   }
 
-  onDeleteClick(e) {
-    this.props.deleteAccount();
-  }
 
   render() {
     const { user } = this.props.auth;
@@ -75,9 +71,9 @@ class Dashboard extends Component {
     if (user.id === "5ba1cc421adfe0b2ccf506b5" || user.id === "5ba24066db305ac17c41551d") {
       dashboardContent = (
         <div className="mb-5 pb-4">
-          <p className="lead text-muted">Welcome {user.name}</p>
+          <p className="lead text-muted">Welcome, {user.name}</p>
           <div className="bg-light rounded border border-secondary p-2">
-            <h4 className="mt-10 mb-4">All Shipping Bookings</h4>
+            <h4 className="mt-10 mb-4 text-center">All Shipping Bookings</h4>
             <table className="table">
               <thead>
                 <tr>
@@ -96,7 +92,7 @@ class Dashboard extends Component {
     } else {
       dashboardContent = (
         <div className="mb-5 pb-4">
-          <p className="lead text-muted">Welcome {user.name}</p>
+          <p className="lead text-muted">Welcome, {user.name}</p>
           <Link to="/update-info" className="btn btn-dark">
             <i className="fas fa-user-circle text-info mr-1" /> Personal Infomation
           </Link>
@@ -118,7 +114,7 @@ class Dashboard extends Component {
             </Link>
           </div>
           <div className="bg-light rounded border border-secondary p-2">
-            <h4 className="mt-10 mb-4">My Shipping Bookings</h4>
+            <h4 className="mt-10 mb-4 text-center">My Shipping Bookings</h4>
             <table className="table">
               <thead>
                 <tr>
@@ -166,5 +162,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteAccount, getCurrentShippings }
+  { getCurrentShippings }
 )(Dashboard);

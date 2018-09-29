@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import PostForm from '../posts/PostForm'; // Form we can type in and submit
-import Spinner from '../common/Spinner';
 import RequestForm from './RequestForm';
 
 class Shippings extends Component {
@@ -25,9 +23,7 @@ class Shippings extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              {/* <PostForm /> */}
               <RequestForm />
-              {/* {postContent} */}
             </div>
           </div>
         </div>
