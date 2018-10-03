@@ -79,7 +79,7 @@ export const getOneShipping = shippingId => dispatch => {
 // Create Ack
 export const createAck = (shippingId, history) => dispatch => {
   axios.post(`/api/shippings/create-ack/${shippingId}`)
-    .then(res => window.location.reload(false))
+    .then(res => window.location.reload(true))
     .catch(err => console.log("Hi"))
 };
 
