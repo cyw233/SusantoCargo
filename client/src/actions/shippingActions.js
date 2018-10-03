@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_SHIPPING, GET_SHIPPING, GET_SHIPPINGS, SHIPPING_LOADING, GET_ERRORS, CLEAR_ERRORS } from './types';
+import { GET_SHIPPING, GET_SHIPPINGS, SHIPPING_LOADING, GET_ERRORS, CLEAR_ERRORS } from './types';
 
 
 // Add Shipping

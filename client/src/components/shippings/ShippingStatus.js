@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../common/Spinner";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { getOneShipping, createAck } from "../../actions/shippingActions";
 import $ from "jquery";
 
@@ -252,13 +252,6 @@ class ShippingStatus extends Component {
               <h3 className="text-center">Shipping Ack</h3>
               {ca}
               {shippingStatus}
-              {/* {
-                user.id === "5ba1cc421adfe0b2ccf506b5" ?
-                <Link to={`/edit-ack/${this.props.shipping.shipping._id}`} className="btn btn-info mb-4">
-                  Edit Ack
-                </Link>
-                : null
-              } */}
             </div>
           </div>
         </div>

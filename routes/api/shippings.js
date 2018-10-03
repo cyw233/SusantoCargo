@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
 const nodemailer = require("nodemailer");
+const keys = require("../../config/keys");
 
 
 // Get Shipping mongo model
@@ -126,7 +127,7 @@ router.post(
       service: 'Gmail',
       auth: {
         user: 'chenyangw233@gmail.com',
-        pass: 'WANGcy888' 
+        pass: keys.emailPassword
       }
     });
 
@@ -140,7 +141,7 @@ router.post(
         // setup email data with unicode symbols
         let mailOptions = {
           from: 'noreply-susanto', // sender address
-          to: user.email, // list of receivers
+          to: user.email + ', linchen19950303@gmail.com', // list of receivers
           subject: 'SusantoCargo - You Latest Shipping Information', // Subject line
           text: 'Hello world? Amazing', // plain text body
           html: `

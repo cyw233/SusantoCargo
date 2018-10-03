@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 // import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import { updateInfo } from "../../actions/authActions";
@@ -148,10 +148,10 @@ class CreateProfile extends Component {
   }
 }
 
-CreateProfile.propTypes = {
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
-};
+// CreateProfile.propTypes = {
+//   auth: PropTypes.object.isRequired,
+//   errors: PropTypes.object.isRequired
+// };
 
 const mapStateToProps = state => ({
   auth: state.auth,

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../common/Spinner";
@@ -27,7 +27,7 @@ class Dashboard extends Component {
       );
     } else {
       let myShippings;
-      if (user.id === "5ba1cc421adfe0b2ccf506b5" || user.id === "5ba24066db305ac17c41551d") {
+      if (user.id === "5ba1cc421adfe0b2ccf506b5" || user.id === "5bb31499182f77635801e71a") {
         myShippings = shippings.slice();
       } else {
         myShippings = shippings.filter(
@@ -38,7 +38,7 @@ class Dashboard extends Component {
       if (myShippings.length === 0) {
         displayShippings = (
           <tr>
-            <td>No shippings</td>
+            <td>No shippings found...</td>
           </tr>
         );
       } else {
@@ -68,7 +68,7 @@ class Dashboard extends Component {
     }
 
     let dashboardContent;
-    if (user.id === "5ba1cc421adfe0b2ccf506b5" || user.id === "5ba24066db305ac17c41551d") {
+    if (user.id === "5ba1cc421adfe0b2ccf506b5" || user.id === "5bb31499182f77635801e71a") {
       dashboardContent = (
         <div className="mb-5 pb-4">
           <p className="lead text-muted">Welcome, {user.name}</p>

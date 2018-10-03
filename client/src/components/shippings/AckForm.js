@@ -4,7 +4,7 @@ import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { editAck } from "../../actions/shippingActions";
 import Spinner from "../common/Spinner";
 
@@ -101,7 +101,7 @@ class Ack extends Component {
               </Link>
               <h1 className="display-4 text-center">Edit the Ack</h1>
               <form onSubmit={this.onSubmit}>
-                <h6>Status</h6>
+                <h6 className="text-muted">Status</h6>
                 <SelectListGroup
                   name="status"
                   value={this.state.status}
@@ -109,7 +109,7 @@ class Ack extends Component {
                   options={options}
                   error={errors.status}
                 />
-                <h6>Pick-up Time</h6>
+                <h6 className="text-muted">Pick-up Time</h6>
                 <TextFieldGroup
                   placeholder="DD/MM/YY"
                   name="pickuptime"
@@ -117,7 +117,7 @@ class Ack extends Component {
                   onChange={this.onChange}
                   error={errors.pickuptime}
                 />
-                <h6>Cost</h6>
+                <h6 className="text-muted">Cost</h6>
                 <TextFieldGroup
                   type="number"
                   placeholder="Cost"
@@ -127,7 +127,7 @@ class Ack extends Component {
                   error={errors.cost}
                   disabled
                 />
-                <h6>HBL Number</h6>
+                <h6 className="text-muted">HBL Number</h6>
                 <TextFieldGroup
                   placeholder="HBL Number"
                   name="hbl"
@@ -135,7 +135,7 @@ class Ack extends Component {
                   onChange={this.onChange}  
                   error={errors.hbl}
                 />
-                <h6>Message (Optional)</h6>
+                <h6 className="text-muted">Message (Optional)</h6>
                 <TextAreaFieldGroup
                   placeholder="Message (Optional)"
                   name="message"
