@@ -53,7 +53,7 @@ Shipper can modify the status of bookings. Normal customers can create shipment 
 
 After users create an shipment, they can view the shipment information and status by clicking the "View Status" button. The shipment status is synchronously updated as Shipper updates it.
 
-**4. Automatic Email Notification**
+**5. Automatic Email Notification**
 
 Whenever a shipment status is changed by the shipper, an automatic email notification including the latest shipment status will be sent to the corresponding customer. 
 
