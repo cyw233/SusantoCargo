@@ -155,7 +155,7 @@ class Ack extends Component {
                   <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                       <div className="modal-header">
-                        <h5 className="modal-title" id="sendingModalLabel">Sending email to the customer...Please wait</h5>
+                        <h5 className="modal-title" id="sendingModalLabel">Sending email to the customer and collector...Please wait</h5>
                         <button type="button" className="close text-white" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>

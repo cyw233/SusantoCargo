@@ -55,7 +55,7 @@ class RequestForm extends Component {
 
     // Select options for status
     const options = [
-      { label: "Departure from Melbourne - Arrival in Jakarta", value: 0 },
+      { label: "Departure Date from Melbourne - Arrival Date in Jakarta", value: 0 },
       { label: "20/10/2018 - 30/10/2018", value: "20/10/2018 - 30/10/2018" },
       { label: "01/11/2018 - 11/11/2018", value: "01/11/2018 - 11/11/2018" },
       { label: "15/11/2018 - 25/11/2018", value: "15/11/2018 - 25/11/2018" },
@@ -103,7 +103,7 @@ class RequestForm extends Component {
                   onChange={this.onChange}
                   error={errors.origin}
                 />
-                <h6>You can choose a shipment period below</h6>
+                <h6>Shipment Information</h6>
                 <SelectListGroup
                   name="shipmentinformation"
                   value={this.state.shipmentinformation}
@@ -129,7 +129,7 @@ class RequestForm extends Component {
                 /> */}
                 <h6>Message (Optional)</h6>
                 <TextAreaFieldGroup
-                  placeholder="Message (Optional)"
+                  placeholder="Message to the shipper (Optional)"
                   name="message"
                   value={this.state.message}
                   onChange={this.onChange}

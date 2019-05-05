@@ -73,7 +73,7 @@ class CreateProfile extends Component {
                 Go Back
               </Link>
               <h1 className="display-4 text-center">Update My Information</h1>
-              <small className="d-block pb-3">All information is required</small>
+              <small className="d-block pb-3">*All information is required</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Name"
