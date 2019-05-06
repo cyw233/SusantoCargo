@@ -35,7 +35,7 @@ You can simply click [here](https://vast-refuge-19212.herokuapp.com/) to view th
 
 **1. Authentication**
 
-Shipper and Collector as two super users can login with pre-defined email and password (You need to manually add these two accounts to the database). Normal customers can sign up with personal information.
+Shipper and Collector as two super users can login with pre-defined email and password (Contact the author if you want to try super-user functions). Normal customers can sign up with personal information.
 
 **2. User Profile**
 
@@ -51,11 +51,14 @@ Shipper can modify the status of bookings. Normal customers can create shipment 
 
 **4. Shipment Acknowledgement**
 
-After users create an shipment, they can view the shipment information and status by clicking the "View Status" button. The shipment status is synchronously updated as Shipper updates it.
+After users create an shipment:
+- Normal users can view the shipment information and status by clicking the "View Status" button. 
+- Shipper can view and shipment status information and edit them to update.
+- Collector can view the shipment status information.
 
 **5. Automatic Email Notification**
 
-Whenever a shipment status is changed by the shipper, an automatic email notification including the latest shipment status will be sent to the corresponding customer. 
+Whenever a shipment status is editted by the Shipper, an automatic email notification including the latest shipment status will be sent to the corresponding user. 
 
 
 
